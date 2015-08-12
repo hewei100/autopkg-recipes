@@ -1,2 +1,2 @@
 # autopkg-recipies
-My Personal AutoPkg Recipes
+A repository of my autopkg recipes.
