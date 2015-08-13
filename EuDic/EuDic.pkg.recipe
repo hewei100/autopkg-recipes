@@ -5,7 +5,7 @@
     <key>Description</key>
     <string>Downloads latest EuDic disk image and pack it into a pkg.</string>
     <key>Identifier</key>
-    <string>org.ef.autopkg.pkg.EuDic</string>
+    <string>com.github.hewei100.EuDic.pkg</string>
     <key>Input</key>
     <dict>
         <key>NAME</key>
@@ -14,7 +14,7 @@
     <key>MinimumVersion</key>
     <string>0.3.0</string>
     <key>ParentRecipe</key>
-    <string>org.ef.autopkg.download.EuDic</string>
+    <string>com.github.hewei100.EuDic.download</string>
     <key>Process</key>
     <array>
         <dict>

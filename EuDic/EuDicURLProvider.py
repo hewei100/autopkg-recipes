@@ -12,7 +12,7 @@ __all__ = ["EuDicURLProvider"]
 EUDIC_UPDATE_URL = "http://www.eudic.net/update/eudic_mac.xml"
 
 class EuDicURLProvider(Processor):
-    description = "To-do: require a 'product_name' to reuse this provider for other products."
+    description = "To-do: require a 'product_name' to reuse this provider for other products from EuDic."
     input_variables = {
         }
     output_variables = {
