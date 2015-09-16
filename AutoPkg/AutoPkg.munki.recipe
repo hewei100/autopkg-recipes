@@ -16,8 +16,8 @@
         <dict>
             <key>description</key>
             <string>Automating packaging and software distribution on OS X</string>
-			<key>developer</key>
-			<string>autopkg</string>
+            <key>developer</key>
+            <string>autopkg</string>
             <key>display_name</key>
             <string>%NAME%</string>
             <key>name</key>
