@@ -19,15 +19,6 @@
     <array>
         <dict>
             <key>Processor</key>
-            <string>Versioner</string>
-            <key>Arguments</key>
-            <dict>
-                <key>input_plist_path</key>
-                <string>%RECIPE_CACHE_DIR%/%NAME%/Eudic.app/Contents/Info.plist</string>
-            </dict>
-        </dict>
-        <dict>
-            <key>Processor</key>
             <string>PkgRootCreator</string>
             <key>Arguments</key>
             <dict>
@@ -49,6 +40,15 @@
                 <string>%RECIPE_CACHE_DIR%/%NAME%/Eudic.app</string>
                 <key>destination_path</key>
                 <string>%pkgroot%/Applications/Eudic.app</string>
+            </dict>
+        </dict>
+        <dict>
+            <key>Processor</key>
+            <string>Versioner</string>
+            <key>Arguments</key>
+            <dict>
+                <key>input_plist_path</key>
+                <string>%destination_path%/Contents/Info.plist</string>
             </dict>
         </dict>
         <dict>
