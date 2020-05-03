@@ -25,7 +25,7 @@
             <key>developer</key>
             <string>Tencent</string>
             <key>display_name</key>
-            <string>腾讯会议</string>
+            <string>Tencent Meeting</string>
             <key>name</key>
             <string>%NAME%</string>
             <key>unattended_install</key>
