@@ -10,15 +10,19 @@ from distutils.version import LooseVersion
 from operator import itemgetter
 
 from autopkglib import Processor, ProcessorError
+from autopkglib.URLGetter import URLGetter
 
 __all__ = ["EuDicURLProvider"]
 
 EUDIC_UPDATE_URL = "http://www.eudic.net/update/eudic_mac.xml"
 
-class EuDicURLProvider(Processor):
+class EuDicURLProvider(URLGetter):
     description = "To-do: require a 'product_name' to reuse this provider for other products from EuDic."
     input_variables = {
+        "version": {
+            "description": "A specific version to download.",
         }
+    }
     output_variables = {
         "version": {
             "description": "Version of the product.",
@@ -39,8 +43,10 @@ class EuDicURLProvider(Processor):
             return cmp(LooseVersion(a), LooseVersion(b))
 
         url = EUDIC_UPDATE_URL
+        req_version = self.env.get('version', '')
         try:
-            manifest_str = urlopen(url).read()
+            # manifest_str = urlopen(url).read()
+            manifest_str = self.download(url, text=True)
         except BaseException as e:
             raise ProcessorError("Unexpected error retrieving product manifest: '%s'" % e)
 
@@ -52,11 +58,14 @@ class EuDicURLProvider(Processor):
                 description = items[0].getElementsByTagName('title')[0].firstChild.nodeValue
                 update = items[0].getElementsByTagName('enclosure')[0]
                 url = update.getAttribute('url')
-                url = re.sub(r'\.dmg\?v=(.*)', '-\\1.dmg', url)
                 version = update.getAttribute('sparkle:shortVersionString')
                 if update.hasAttribute('sparkle:version'):
                     version += '.' + update.getAttribute('sparkle:version')
-  
+
+                if req_version and req_version != 'latest':
+                    version = req_version
+                    url = re.sub(r'\?v=.*$', '', url) + '?' + version
+
                 self.env["version"] = version
                 self.env["description"] = description
                 self.env["url"] = url
