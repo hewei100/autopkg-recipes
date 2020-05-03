@@ -18,6 +18,10 @@
 		<string>latest</string>
 		<key>pkginfo</key>
         <dict>
+            <key>catalogs</key>
+            <array>
+                <string>testing</string>
+            </array>
             <key>categoty</key>
             <string>Utilities</string>
             <key>description</key>
