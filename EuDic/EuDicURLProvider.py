@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 
-import urllib2
+try:
+    from urllib2 import urlopen
+except:
+    from urllib.request import urlopen
+import re
 import xml.dom.minidom
 from distutils.version import LooseVersion
 from operator import itemgetter
@@ -36,7 +40,7 @@ class EuDicURLProvider(Processor):
 
         url = EUDIC_UPDATE_URL
         try:
-            manifest_str = urllib2.urlopen(url).read()
+            manifest_str = urlopen(url).read()
         except BaseException as e:
             raise ProcessorError("Unexpected error retrieving product manifest: '%s'" % e)
 
@@ -48,6 +52,7 @@ class EuDicURLProvider(Processor):
                 description = items[0].getElementsByTagName('title')[0].firstChild.nodeValue
                 update = items[0].getElementsByTagName('enclosure')[0]
                 url = update.getAttribute('url')
+                url = re.sub(r'\.dmg\?v=(.*)', '-\\1.dmg', url)
                 version = update.getAttribute('sparkle:shortVersionString')
                 if update.hasAttribute('sparkle:version'):
                     version += '.' + update.getAttribute('sparkle:version')
