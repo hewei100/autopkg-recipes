@@ -11,7 +11,7 @@
         <key>NAME</key>
         <string>AutoPkg</string>
 		<key>MUNKI_REPO_SUBDIR</key>
-        <string>apps/autopkg</string>
+        <string>munkitools</string>
 		<key>pkginfo</key>
         <dict>
             <key>catalogs</key>
@@ -19,7 +19,7 @@
                 <string>testing</string>
             </array>
             <key>category</key>
-            <string>Munki Tools</string>
+            <string>munkitools</string>
             <key>description</key>
             <string>Automating packaging and software distribution on OS X</string>
             <key>developer</key>
