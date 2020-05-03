@@ -20,6 +20,7 @@ class EuDicURLProvider(URLGetter):
     description = "To-do: require a 'product_name' to reuse this provider for other products from EuDic."
     input_variables = {
         "version": {
+            "required": False,
             "description": "A specific version to download.",
         }
     }
