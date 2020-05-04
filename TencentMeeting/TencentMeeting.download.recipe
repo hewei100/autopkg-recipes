@@ -11,7 +11,7 @@
         <key>NAME</key>
         <string>TencentMeeting</string>
         <key>VERSION</key>
-        <string>1.3.7.402</string>
+        <string>latest</string>
         <key>USER_AGENT</key>
         <string>Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_3) AppleWebKit/536.28.10 (KHTML, like Gecko) Version/6.0.3 Safari/536.28.10</string>
     </dict>
@@ -33,11 +33,20 @@
         </dict>
         <dict>
             <key>Processor</key>
+            <string>TencentMeetingURLProvider</string>
+            <key>Arguments</key>
+            <dict>
+                <key>version</key>
+                <string>%VERSION%</string>
+            </dict>
+        </dict>
+        <dict>
+            <key>Processor</key>
             <string>URLDownloader</string>
             <key>Arguments</key>
             <dict>
                 <key>url</key>
-                <string>https://down.qq.com/download/TencentMeeting_0300000000_%VERSION%.publish.dmg</string>
+                <string>%url%</string>
                 <key>request_headers</key>
                 <dict>
                     <key>user-agent</key>
