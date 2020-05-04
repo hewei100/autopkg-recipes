@@ -3,9 +3,7 @@
 from requests_html import HTMLSession
 
 import re
-import xml.dom.minidom
 from distutils.version import LooseVersion
-from operator import itemgetter
 
 from autopkglib import Processor, ProcessorError
 from autopkglib.URLGetter import URLGetter
@@ -16,6 +14,7 @@ LANDING_PAGE_URL = "https://meeting.tencent.com/download-center.html?from=1001"
 DOWNLOAD_URL = "https://down.qq.com/download/TencentMeeting_0300000000_{version}.publish.dmg"
 
 class TencentMeetingURLProvider(URLGetter):
+    description = "Render Tencent Meeting client download page to retrive latest version string for composing download URL."
     input_variables = {
         "version": {
             "required": False,
@@ -43,14 +42,12 @@ class TencentMeetingURLProvider(URLGetter):
 
         requested_version = self.env.get('version', '')
 
-
-        else:
         self.output("Rendering page %s" % LANDING_PAGE_URL)
         session = HTMLSession()
         r = session.get(LANDING_PAGE_URL)
         r.html.render()
         description = r.html.find('meta[name="description"]')[0].attrs['content']
-        version_str = r.html.find('#mac-version')[0]
+        version_str = r.html.find('#mac-version')[0].text
         self.output("Found: %s" % version_str)
         version = re.sub(r'(^[^\d]+)', '', version_str)
 
