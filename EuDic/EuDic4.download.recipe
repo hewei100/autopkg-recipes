@@ -11,9 +11,9 @@
         <key>NAME</key>
         <string>EuDic4</string>
         <key>SEARCH_URL</key>
-        <string>http://www.meshmixer.com/download.html</string>
+        <string>https://www.eudic.net/v4/en/app/download</string>
         <key>SEARCH_PATTERN</key>
-        <string>(?P&lt;url&gt;https://.*eudicmac\.dmg[?]v=(?P:&lt;version&gt;[^"']*))</string>
+        <string>(?P&lt;url&gt;https://.*eudicmac\.dmg[?]v=(?P&lt;version&gt;[^"']*))</string>
         <key>USER_AGENT</key>
         <string>Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_3) AppleWebKit/536.28.10 (KHTML, like Gecko) Version/6.0.3 Safari/536.28.10</string>
     </dict>
