@@ -11,7 +11,7 @@
         <key>NAME</key>
         <string>WeChat</string>
 		    <key>MUNKI_REPO_SUBDIR</key>
-        <string>apps/eudic</string>
+        <string>apps/wechat</string>
       	<key>pkginfo</key>
         <dict>
             <key>catalogs</key>
@@ -19,11 +19,11 @@
                 <string>testing</string>
             </array>
             <key>category</key>
-            <string>Reference</string>
+            <string>Social Networking</string>
             <key>description</key>
             <string>A free messaing and calling app.</string>
             <key>developer</key>
-            <string>EuSoft</string>
+            <string>Tencent Inc.</string>
             <key>display_name</key>
             <string>%NAME%</string>
             <key>name</key>
