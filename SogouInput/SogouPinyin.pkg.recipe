@@ -141,7 +141,7 @@
         <dict>
             <!-- split original installer script into preflight and postflight -->
             <key>Processor</key>
-            <string>InstallScriptSplitter</string>
+            <string>SogouInstallScriptSplitter</string>
             <key>Arguments</key>
             <dict>
                 <key>install_script</key>
