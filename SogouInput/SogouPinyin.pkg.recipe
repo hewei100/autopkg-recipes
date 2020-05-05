@@ -126,8 +126,9 @@
                 <string>%pkgroot%/Library/LaunchAgents/com.sogou.SogouTaskManager.plist</string>
             </dict>
         </dict>
+<!--
         <dict>
-            <!-- save a copy of app's built-in install.sh -->
+            <!~~ save a copy of app's built-in install.sh ~~>
             <key>Processor</key>
             <string>Copier</string>
             <key>Arguments</key>
@@ -138,10 +139,11 @@
                 <string>%RECIPE_DIR%/install-%version%.sh</string>
             </dict>
         </dict>
+-->
         <dict>
             <!-- split original installer script into preflight and postflight -->
             <key>Processor</key>
-            <string>SogouInstallScriptSplitter</string>
+            <string>InstallScriptSplitter</string>
             <key>Arguments</key>
             <dict>
                 <key>install_script</key>
