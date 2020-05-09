@@ -19,6 +19,15 @@
     <array>
         <dict>
             <key>Processor</key>
+            <string>AppDmgVersioner</string>
+            <key>Arguments</key>
+            <dict>
+                <key>dmg_path</key>
+                <string>%pathname%</string>
+            </dict>
+        </dict>
+        <dict>
+            <key>Processor</key>
             <string>PkgRootCreator</string>
             <key>Arguments</key>
             <dict>
@@ -56,10 +65,14 @@
             <string>PkgCreator</string>
             <key>Arguments</key>
             <dict>
-                <key>pkgname</key>
-                <string>%NAME%-%version%</string>
                 <key>pkg_request</key>
                 <dict>
+                  <key>pkgname</key>
+                  <string>%NAME%-%version%</string>
+                    <key>version</key>
+                    <string>%version%</string>
+                    <key>id</key>
+                    <string>%bundleid%</string>
                     <key>pkgdir</key>
                     <string>%RECIPE_CACHE_DIR%</string>
                     <key>options</key>
