@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Description</key>
+    <string>Downloads latest Adobe Acrobat Reader DC Spelling Dictionary Pack disk image and pack it into a pkg.</string>
+    <key>Identifier</key>
+    <string>com.github.hewei100.AdobeReaderDC_SDPack.pkg</string>
+    <key>Input</key>
+    <dict>
+        <key>NAME</key>
+        <string>AdobeReaderDC_SDPack</string>
+    </dict>
+    <key>MinimumVersion</key>
+    <string>1.1</string>
+    <key>ParentRecipe</key>
+    <string>com.github.hewei100.AdobeReaderDC_SDPack.download</string>
+    <key>Process</key>
+    <array>
+<!--
+        <dict>
+            <key>Arguments</key>
+            <dict>
+                <key>input_plist_path</key>
+                <string>%pathname%/EuDic.app/Contents/Info.plist</string>
+                <key>plist_version_key</key>
+                <string>CFBundleShortVersionString</string>
+            </dict>
+            <key>Processor</key>
+            <string>Versioner</string>
+        </dict>
+ -->
+        <dict>
+            <key>Processor</key>
+            <string>AppPkgCreator</string>
+        </dict>
+    </array>
+</dict>
+</plist>

@@ -44,7 +44,7 @@ comments and to add and edit custom words to their user dictionaries for future 
         </dict>
     </dict>
     <key>ParentRecipe</key>
-    <string>com.github.hewei100.AdobeReaderDC_SDPack.download</string>
+    <string>com.github.hewei100.AdobeReaderDC_SDPack.pkg</string>
     <key>Process</key>
     <array>
         <dict>
