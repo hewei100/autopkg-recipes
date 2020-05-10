@@ -39,9 +39,24 @@
         </dict>
         <dict>
             <key>Processor</key>
+            <string>FileFinder</string>
+            <key>Arguments</key>
+            <dict>
+                <key>comment</key>
+                <string>Use existing file for a specific version.</string>
+                <key>found_filename</key>
+                <string>%pathname%</string>
+                <key>pattern</key>
+                <string>%RECIPE_CACHE_DIR%/downloads/sogou_mac_%VERSION%.zip</string>
+            </dict>
+        </dict>
+        <dict>
+            <key>Processor</key>
             <string>Unarchiver</string>
             <key>Arguments</key>
             <dict>
+                <key>archive_path</key>
+                <string>%found_filename%</string>
                 <key>destination_path</key>
                 <string>%RECIPE_CACHE_DIR%/installer</string>
                 <key>purge_destination</key>
@@ -73,6 +88,7 @@
                 <true/>
             </dict>
         </dict>
+<!--
         <dict>
             <key>Processor</key>
             <string>Versioner</string>
@@ -80,6 +96,24 @@
             <dict>
                 <key>input_plist_path</key>
                 <string>%RECIPE_CACHE_DIR%/payload/SogouInput.app/Contents/Info.plist</string>
+            </dict>
+        </dict>
+ -->
+        <dict>
+            <!-- extract bundleid & version from SogouInput.app -->
+            <key>Processor</key>
+            <string>PlistReader</string>
+            <key>Arguments</key>
+            <dict>
+                <key>info_path</key>
+                <string>%RECIPE_CACHE_DIR%/payload/SogouInput.app/Contents/Info.plist</string>
+                <key>plist_keys</key>
+                <dict>
+                    <key>CFBundleShortVersionString</key>
+                    <string>version</string>
+                    <key>CFBundleIdentifier</key>
+                    <string>bundleid</string>
+                </dict>
             </dict>
         </dict>
         <dict>
@@ -143,7 +177,7 @@
         <dict>
             <!-- split original installer script into preflight and postflight -->
             <key>Processor</key>
-            <string>InstallScriptSplitter</string>
+            <string>SogouInstallScriptSplitter</string>
             <key>Arguments</key>
             <dict>
                 <key>install_script</key>
@@ -183,7 +217,7 @@
                     <key>version</key>
                     <string>%version%</string>
                     <key>id</key>
-                    <string>com.sogou.pinyin.pkg</string>
+                    <string>%bundleid%</string>
                     <!--
                     <key>infofile</key>
                     <string>%RECIPE_CACHE_DIR%/PackageInfo</string>

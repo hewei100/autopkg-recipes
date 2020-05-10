@@ -34,25 +34,26 @@ class SogouInputURLProvider(URLGetter):
         if product_name == 'editor':
             product_name = 'skineditor'
 
-        version = self.env.get('version', '')
-        if version:
-            if version == 'latest':
-                version = ''
-
         if product_name == 'pinyin':
-            page_url = 'http://pinyin.sogou.com/mac/'
-            # content = self.download(page_url, text=True)
-            r = requests.get(page_url)
-            tree = html.fromstring(r.content) # page is encoded as gbk
-            url = list(tree.find_class('NowDownload')[0].iter('a'))[0].get('href')
-            # http://cdn2.ime.sogou.com/61a944f90b26d4b87b494ba5467b4a9f/5eb12871/dl/index/1586258596/sogou_mac_57a.zip
-            if version:
-                url = re.sub(r'(?<=mac_)57a', version, url)
+            version = self.env.get('version', '')
+            if version and version != 'latest':
+                # no way to download a specific older version
+                # mac_57a, mac_58a ...
+                # url = re.sub(r'(?<=mac_)\d+[a-z]?', version, url)
+                product_name = 'mac'
+                # http://cdn2.ime.sogou.com/aad9bee6bbac8bae76bd5a71aaa54b16/5eb77835/dl/index/1524452957/sogou_mac_47b.zip
+            else:
+                page_url = 'http://pinyin.sogou.com/mac/'
+                # content = self.download(page_url, text=True)
+                r = requests.get(page_url)
+                tree = html.fromstring(r.content) # page is encoded as gbk
+                url = list(tree.find_class('NowDownload')[0].iter('a'))[0].get('href')
+                # http://cdn2.ime.sogou.com/61a944f90b26d4b87b494ba5467b4a9f/5eb12871/dl/index/1586258596/sogou_mac_57a.zip
 
-        elif product_name == 'wubi' or product_name == 'skineditor':
-            url = 'https://pinyin.sogou.com/mac/softdown.php?r=%s' % product_name
-            #if version:
-            #    url += '&v=' + version
+        if product_name in ['wubi', 'skineditor', 'mac']:
+            r = requests.head('https://pinyin.sogou.com/mac/softdown.php?r=%s' % product_name)
+            url = r.headers.get('location')
+            # http://cdn2.ime.sogou.com/ba1a2da9a70b1ac2b7753fbdcaa32c6a/5eb77733/dl/index/1568199881/sogou_mac_wubi_13a.zip
 
         self.output("Download URL for %s: %s" % (product_name, url))
         self.env["url"] = url
