@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Description</key>
+    <string>Downloads the Adobe Acrobat Reader DC Font Pack and imports into Munki.</string>
+    <key>Identifier</key>
+    <string>com.github.hewei100.AdobeReaderDC_FontPack.munki</string>
+    <key>Input</key>
+    <dict>
+        <key>MUNKI_REPO_SUBDIR</key>
+        <string>apps/Adobe</string>
+        <key>NAME</key>
+        <string>AdobeReaderDC_FontPack</string>
+        <key>pkginfo</key>
+        <dict>
+            <key>catalogs</key>
+            <array>
+                <string>testing</string>
+            </array>
+            <key>description</key>
+            <string>Adobe Acrobat Reader DC Font Pack enables you to display and interact with documents authored in
+languages other than those supported in your native Adobe Reader. It is needed to correctly display a document when
+an author does not embed the appropriate font into the document. It is also needed when the author does embed the font,
+but the reader of the document wishes to interact in some way with its content, for example, by collaborating,
+commenting, or filling out forms.</string>
+            <key>display_name</key>
+            <string>Adobe Acrobat Reader Font Pack</string>
+            <key>minimum_os_version</key>
+            <string>10.9.0</string>
+            <key>name</key>
+            <string>%NAME%</string>
+            <key>unattended_install</key>
+            <true/>
+            <key>minimum_munki_version</key>
+            <string>0.7.1.1173</string>
+            <key>update_for</key>
+            <array>
+                <string>AdobeReaderEXTALFLanguagePack</string>
+            </array>
+            <key>requires</key>
+            <array>
+                <string>AdobeReaderDC</string>
+            </array>
+        </dict>
+    </dict>
+    <key>ParentRecipe</key>
+    <string>com.github.hewei100.AdobeReaderDC_FontPack.download</string>
+    <key>Process</key>
+    <array>
+        <dict>
+            <key>Arguments</key>
+            <dict>
+                <key>pkg_path</key>
+                <string>%pathname%</string>
+                <key>repo_subdirectory</key>
+                <string>%MUNKI_REPO_SUBDIR%</string>
+            </dict>
+            <key>Processor</key>
+            <string>MunkiImporter</string>
+        </dict>
+    </array>
+</dict>
+</plist>

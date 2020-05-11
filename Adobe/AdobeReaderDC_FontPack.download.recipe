@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Description</key>
+    <string>Downloads the Adobe Acrobat Reader DC Font Pack.</string>
+    <key>Identifier</key>
+    <string>com.github.hewei100.AdobeReaderDC_FontPack.download</string>
+    <key>Input</key>
+    <dict>
+        <key>NAME</key>
+        <string>AdobeReaderDC_FontPack</string>
+        <key>PAGE_URL</key>
+        <string>https://supportdownloads.adobe.com/detail.jsp?ftpID=6486</string>
+        <key>PAGE_PATTERN</key>
+        <string>(?P&lt;url1&gt;thankyou.jsp.*&amp;)amp;(?P&lt;url2&gt;[^"]+)</string>
+        <key>SEARCH_PATTERN</key>
+        <string>(http://[^"]+\.dmg)</string>
+    </dict>
+    <key>MinimumVersion</key>
+    <string>0.4.0</string>
+    <key>Process</key>
+    <array>
+        <dict>
+            <key>Processor</key>
+            <string>URLTextSearcher</string>
+            <key>Arguments</key>
+            <dict>
+                <key>url</key>
+                <string>%PAGE_URL%</string>
+                <key>re_pattern</key>
+                <string>%PAGE_PATTERN%</string>
+            </dict>
+        </dict>
+        <dict>
+            <key>Processor</key>
+            <string>URLTextSearcher</string>
+            <key>Arguments</key>
+            <dict>
+                <key>url</key>
+                <string>https://supportdownloads.adobe.com/%url1%%url2%</string>
+                <key>re_pattern</key>
+                <string>%SEARCH_PATTERN%</string>
+            </dict>
+        </dict>
+        <dict>
+            <key>Processor</key>
+            <string>URLDownloader</string>
+            <key>Arguments</key>
+            <dict>
+                <key>url</key>
+                <string>%match%</string>
+            </dict>
+        </dict>
+        <dict>
+            <key>Processor</key>
+            <string>EndOfCheckPhase</string>
+        </dict>
+    </array>
+</dict>
+</plist>
