@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
     <key>Description</key>
-    <string>Downloads latest AutoPkg release and imports into Munki.</string>
+    <string>Downloads latest Office 365 apps and imports into Munki.</string>
     <key>Identifier</key>
-    <string>com.github.hewei100.MicrosoftOffice365BusinessProSuite.munki</string>
+    <string>com.github.hewei100.munki.MicrosoftOffice365BusinessProSuite</string>
     <key>Input</key>
     <dict>
 		<key>DOWNLOAD_URL_BASE</key>
