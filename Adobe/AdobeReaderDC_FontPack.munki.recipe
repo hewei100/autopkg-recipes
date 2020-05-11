@@ -25,7 +25,7 @@ an author does not embed the appropriate font into the document. It is also need
 but the reader of the document wishes to interact in some way with its content, for example, by collaborating,
 commenting, or filling out forms.</string>
             <key>display_name</key>
-            <string>Adobe Acrobat Reader Font Pack</string>
+            <string>Adobe Acrobat Reader DC Font Pack</string>
             <key>minimum_os_version</key>
             <string>10.9.0</string>
             <key>name</key>
