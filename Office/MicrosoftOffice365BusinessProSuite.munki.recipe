@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Description</key>
+    <string>Downloads latest AutoPkg release and imports into Munki.</string>
+    <key>Identifier</key>
+    <string>com.github.hewei100.MicrosoftOffice365BusinessProSuite.munki</string>
+    <key>Input</key>
+    <dict>
+		<key>DOWNLOAD_URL_BASE</key>
+		<string>https://go.microsoft.com/fwlink/?linkid=</string>
+		<key>ID</key>
+		<string>2009112</string>
+		<key>NAME</key>
+		<string>Microsoft Office 365 Business Pro Suite</string>
+		<key>SOFTWARETITLE1</key>
+		<string>Office</string>
+		<key>SOFTWARETITLE2</key>
+		<string>Business</string>
+		<key>SOFTWARETITLE3</key>
+		<string>Pro</string>
+		<key>SOFTWARETITLE4</key>
+		<string>Suite</string>
+		<key>VENDOR</key>
+		<string>Microsoft</string>
+		<key>MUNKI_REPO_SUBDIR</key>
+        <string>apps/Office</string>
+		<key>pkginfo</key>
+        <dict>
+            <key>catalogs</key>
+            <array>
+                <string>testing</string>
+            </array>
+            <key>category</key>
+            <string>Productivity</string>
+            <key>description</key>
+            <string>Microsoft 365 Change me</string>
+            <key>developer</key>
+            <string>%VENDOR%</string>
+            <key>display_name</key>
+            <string>%NAME%</string>
+            <key>name</key>
+            <string>%NAME%</string>
+            <key>unattended_install</key>
+            <true/>
+        </dict>
+    </dict>
+    <key>MinimumVersion</key>
+    <string>0.3.0</string>
+    <key>ParentRecipe</key>
+    <string>com.github.rtrouton.pkg.MicrosoftOffice365BusinessProSuite</string>
+    <key>Process</key>
+    <array>
+        <dict>
+            <key>Arguments</key>
+            <dict>
+                <key>repo_subdirectory</key>
+                <string>%MUNKI_REPO_SUBDIR%</string>
+                <key>pkg_path</key>
+                <string>%pathname%</string>
+            </dict>
+            <key>Processor</key>
+            <string>MunkiImporter</string>
+        </dict>
+    </array>
+</dict>
+</plist>
