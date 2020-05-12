@@ -5,14 +5,14 @@
     <key>Description</key>
     <string>Download latest Tencent meeting client import into Munki.</string>
     <key>Identifier</key>
-    <string>com.github.hewei100.TencentMeeting.munki</string>
+    <string>com.github.hewei100.munki.TencentMeeting</string>
     <key>Input</key>
     <dict>
         <key>NAME</key>
         <string>TencentMeeting</string>
-    		<key>MUNKI_REPO_SUBDIR</key>
+    	<key>MUNKI_REPO_SUBDIR</key>
         <string>apps</string>
-    		<key>pkginfo</key>
+    	<key>pkginfo</key>
         <dict>
             <key>catalogs</key>
             <array>
@@ -35,7 +35,7 @@
     <key>MinimumVersion</key>
     <string>0.5.0</string>
     <key>ParentRecipe</key>
-    <string>com.github.hewei100.TencentMeeting.pkg</string>
+    <string>com.github.hewei100.pkg.TencentMeeting</string>
     <key>Process</key>
     <array>
         <dict>

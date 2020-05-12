@@ -5,7 +5,7 @@
     <key>Description</key>
     <string>Downloads latest Tencent meeting client disk image.</string>
     <key>Identifier</key>
-    <string>com.github.hewei100.TencentMeeting.download</string>
+    <string>com.github.hewei100.download.TencentMeeting</string>
     <key>Input</key>
     <dict>
         <key>NAME</key>
@@ -19,18 +19,6 @@
     <string>0.6.1</string>
     <key>Process</key>
     <array>
-        <dict>
-            <key>Arguments</key>
-            <dict>
-                <key>additional_pkginfo</key>
-                <dict>
-                    <key>version</key>
-                    <string>%VERSION%</string>
-                </dict>
-            </dict>
-            <key>Processor</key>
-            <string>MunkiPkginfoMerger</string>
-        </dict>
         <dict>
             <key>Processor</key>
             <string>TencentMeetingURLProvider</string>
@@ -53,7 +41,7 @@
                     <string>%USER_AGENT%</string>
                 </dict>
                 <key>filename</key>
-                <string>%NAME%-%VERSION%.dmg</string>
+                <string>%NAME%-%version%.dmg</string>
             </dict>
         </dict>
         <dict>
