@@ -32,7 +32,7 @@
                 <dict>
                     <key>Library</key>
                     <string>0755</string>
-                    <key>Library/Input Methods</key>
+                    <key>Library/Preferences</key>
                     <string>0755</string>
                 </dict>
             </dict>
