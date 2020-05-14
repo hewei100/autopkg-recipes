@@ -49,9 +49,9 @@
                 <key>plist_data</key>
                 <dict>
                     <key>InstallAppleSoftwareUpdates</key>
-                    <bool>false</bool>
+                    <false/>
                     <key>ShowRemovalDetail</key>
-                    <bool>true</bool>
+                    <true/>
                     <key>SoftwareUpdateServerURL</key>
                     <string>%MUNKI_REPO_URL%</string>
                 </dict>
