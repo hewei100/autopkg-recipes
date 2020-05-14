@@ -12,8 +12,6 @@
         <string>MunkiTools_Settings</string>
         <key>VERSION</key>
         <string>2020.05.14</string>
-        <key>BUNDLEID</key>
-        <string>ef.org.munkitoolssettings</string>
         <key>MUNKI_REPO_URL</key>
         <string>https://munki.efchina.org</string>
     </dict>
@@ -71,7 +69,7 @@
                     <key>version</key>
                     <string>%VERSION%</string>
                     <key>id</key>
-                    <string>%BUNDLEID%</string>
+                    <string>org.ef.munkitoolssettings</string>
                     <key>options</key>
                     <string>purge_ds_store</string>
                     <key>chown</key>
