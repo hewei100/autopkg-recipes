@@ -5,7 +5,7 @@
     <key>Description</key>
     <string>Downloads the Adobe Acrobat Reader DC Spelling Dictionary Pack and imports into Munki.</string>
     <key>Identifier</key>
-    <string>com.github.hewei100.AdobeReaderDC_SDPack.munki</string>
+    <string>com.github.hewei100.munki.AdobeReaderDC_SDPack</string>
     <key>Input</key>
     <dict>
         <key>MUNKI_REPO_SUBDIR</key>
@@ -36,6 +36,7 @@ comments and to add and edit custom words to their user dictionaries for future 
             <key>update_for</key>
             <array>
                 <string>AdobeReaderLingDictPack</string>
+				<string>AdobeReaderDCSDPack</string>
             </array>
             <key>requires</key>
             <array>
@@ -44,7 +45,7 @@ comments and to add and edit custom words to their user dictionaries for future 
         </dict>
     </dict>
     <key>ParentRecipe</key>
-    <string>com.github.hewei100.AdobeReaderDC_SDPack.download</string>
+    <string>com.github.hewei100.download.AdobeReaderDC_SDPack</string>
     <key>Process</key>
     <array>
         <dict>

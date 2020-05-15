@@ -5,7 +5,7 @@
     <key>Description</key>
     <string>Downloads the Adobe Acrobat Reader DC Spelling Dictionary Pack.</string>
     <key>Identifier</key>
-    <string>com.github.hewei100.AdobeReaderDC_SDPack.download</string>
+    <string>com.github.hewei100.download.AdobeReaderDC_SDPack</string>
     <key>Input</key>
     <dict>
         <key>NAME</key>

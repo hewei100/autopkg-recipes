@@ -5,7 +5,7 @@
     <key>Description</key>
     <string>Downloads the Adobe Acrobat Reader DC Font Pack.</string>
     <key>Identifier</key>
-    <string>com.github.hewei100.AdobeReaderDC_FontPack.download</string>
+    <string>com.github.hewei100.download.AdobeReaderDC_FontPack</string>
     <key>Input</key>
     <dict>
         <key>NAME</key>
