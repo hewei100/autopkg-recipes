@@ -20,15 +20,25 @@
         <dict>
             <key>Arguments</key>
             <dict>
-                <key>input_plist_path</key>
+                <key>plist_keys</key>
+                <dict>
+                    <key>CFBundleShortVersionString</key>
+                    <string>version</string>
+                    <key>CFBundleVersion</key>
+                    <string>release</string>
+                </dict>
+                <key>info_path</key>
                 <string>%pathname%/TencentMeeting.app/Contents/Info.plist</string>
-                <key>plist_version_key</key>
-                <string>CFBundleShortVersionString</string>
             </dict>
             <key>Processor</key>
-            <string>Versioner</string>
+            <string>PlistReader</string>
         </dict>
         <dict>
+            <key>Arguments</key>
+            <dict>
+                <key>version</key>
+                <string>%version%.%release%</string>
+            </dict>
             <key>Processor</key>
             <string>AppPkgCreator</string>
         </dict>
