@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from requests_html import HTMLSession
+from requests_html import AsyncHTMLSession
 
 import re
 from distutils.version import LooseVersion
@@ -11,54 +11,61 @@ from autopkglib.URLGetter import URLGetter
 __all__ = ["TencentMeetingURLProvider"]
 
 LANDING_PAGE_URL = "https://meeting.tencent.com/download-center.html?from=1001"
-DOWNLOAD_URL = "https://down.qq.com/download/TencentMeeting_0300000000_{version}.publish.dmg"
+#DOWNLOAD_URL = "https://down.qq.com/download/TencentMeeting_0300000000_{version}.publish.dmg"
+DOWNLOAD_PAGE_URL = "https://meeting.tencent.com/download-mac.html?from=1001&fromSource=1"
 
 class TencentMeetingURLProvider(URLGetter):
     description = "Render Tencent Meeting client download page to retrive latest version string for composing download URL."
     input_variables = {
-        "version": {
-            "required": False,
-            "description": "A specific version to download.",
-        }
+#         "version": {
+#             "required": False,
+#             "description": "A specific version to download.",
+#         }
     }
     output_variables = {
         "version": {
-            "description": "Version of the product.",
+            "description": "Latest version of the product.",
         },
         "url": {
             "description": "Download URL.",
         },
-        "description": {
-            "description": "Update description."
-        }
+#         "description": {
+#             "description": "Update description."
+#         }
     }
 
     __doc__ = description
 
     def main(self):
 
-        def compare_version(a, b):
-            return cmp(LooseVersion(a), LooseVersion(b))
+#         requested_version = self.env.get('version', '')
+        user_agent = self.env.get('user-agent', '')
 
-        requested_version = self.env.get('version', '')
+        asession = AsyncHTMLSession()
 
-        self.output("Rendering page %s" % LANDING_PAGE_URL)
-        session = HTMLSession()
-        r = session.get(LANDING_PAGE_URL)
-        r.html.render()
-        description = r.html.find('meta[name="description"]')[0].attrs['content']
-        version_str = r.html.find('#mac-version')[0].text
-        self.output("Found: %s" % version_str)
-        version = re.sub(r'(^[^\d]+)', '', version_str)
+        def reqeust_callback(req):
+            if '/updatecdn.meeting.qq.com/' in req.url:
+                 self.env["url"] = req.url
 
-        if requested_version and requested_version != 'latest':
-            version = requested_version
+        async def get_version_str():
+            r = await asession.get(LANDING_PAGE_URL, headers={'User-agent': user_agent})
+            await r.html.arender()
+            self.env["version"] = r.html.xpath('//*[@id="mac-version__value"]/text()')[0]
 
-        url = DOWNLOAD_URL.format(version=version)
+        async def get_download_url():
+            r = await asession.get(DOWNLOAD_PAGE_URL, headers={'User-agent': user_agent})
+#             script = r.html.find('.download-msg a')[0].attrs.get('onclick')
+            await r.html.arender(keep_page=True)
+            r.html.page.on('request', reqeust_callback)
 
-        self.env["version"] = version
-        self.env["description"] = description
-        self.env["url"] = url
+        asession.run(get_version_str, get_download_url)
+
+#         results = asession.run(get_version_str, get_download_url)
+#         urls, version = results
+
+#         self.env["version"] = version
+#         self.env["description"] = description
+#         self.env["url"] = urls.pop()
 
 if __name__ == "__main__":
     processor = TencentMeetingURLProvider()

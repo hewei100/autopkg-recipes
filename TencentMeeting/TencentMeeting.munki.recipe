@@ -45,6 +45,25 @@
                 <dict>
                     <key>version</key>
                     <string>%version%</string>
+                    <key>installcheck_script</key>
+                    <string><![CDATA[#!/usr/bin/python
+import os
+import sys
+from distutils.version import LooseVersion
+import plistlib
+
+plist = "/Applications/TencentMeeting.app/Contents/Info.plist"
+if not os.path.isfile(plist):
+    sys.exit(1)
+
+info = plistlib.readPlist(plist)
+installed_version = info['CFBundleVersion']
+if '.' not in installed_version:
+    installed_version = info['CFBundleShortVersionString'] + '.' + installed_version
+
+offered_version = "%version%"
+
+sys.exit(int(LooseVersion(offered_version) <= LooseVersion(installed_version)))]]></string>
                 </dict>
             </dict>
             <key>Processor</key>
@@ -58,8 +77,7 @@
                 <key>repo_subdirectory</key>
                 <string>%MUNKI_REPO_SUBDIR%</string>
                 <key>version_comparison_key</key>
-                <!-- <string>CFBundleVersion</string> -->
-                <string>CFBundleShortVersionString</string>
+                <string>CFBundleVersion</string>
             </dict>
             <key>Processor</key>
             <string>MunkiImporter</string>
