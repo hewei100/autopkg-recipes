@@ -54,7 +54,7 @@ import plistlib
 
 plist = "/Applications/TencentMeeting.app/Contents/Info.plist"
 if not os.path.isfile(plist):
-    sys.exit(1)
+    sys.exit(0)
 
 info = plistlib.readPlist(plist)
 installed_version = info['CFBundleVersion']
