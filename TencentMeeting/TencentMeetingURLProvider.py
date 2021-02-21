@@ -50,7 +50,7 @@ class TencentMeetingURLProvider(URLGetter):
         async def get_version_str():
             r = await asession.get(LANDING_PAGE_URL, headers={'User-agent': user_agent})
             await r.html.arender()
-            self.env["version"] = r.html.xpath('//*[@id="mac-version__value"]/text()')[0]
+            self.env["version"] = r.html.xpath('//*[@id="mac-arm64-version__value"]/text()')[0]
 
         async def get_download_url():
             r = await asession.get(DOWNLOAD_PAGE_URL, headers={'User-agent': user_agent})
