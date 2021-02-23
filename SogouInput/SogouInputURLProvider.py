@@ -49,6 +49,8 @@ class SogouInputURLProvider(URLGetter):
                 tree = html.fromstring(r.content) # page is encoded as gbk
                 url = list(tree.find_class('NowDownload')[0].iter('a'))[0].get('href')
                 # http://cdn2.ime.sogou.com/61a944f90b26d4b87b494ba5467b4a9f/5eb12871/dl/index/1586258596/sogou_mac_57a.zip
+                # back-fill version
+                self.env["version"] = re.sub(r'^.*_|[.][^.]*$', '', url)
 
         if product_name in ['wubi', 'skineditor', 'mac']:
             r = requests.head('https://pinyin.sogou.com/mac/softdown.php?r=%s' % product_name)

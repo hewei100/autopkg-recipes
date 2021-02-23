@@ -43,11 +43,11 @@
             <key>Arguments</key>
             <dict>
                 <key>comment</key>
-                <string>Use existing file for a specific version.</string>
+                <string>Use existing file for a specific (or back-filled) version.</string>
                 <key>found_filename</key>
                 <string>%pathname%</string>
                 <key>pattern</key>
-                <string>%RECIPE_CACHE_DIR%/downloads/sogou_mac_%VERSION%.zip</string>
+                <string>%RECIPE_CACHE_DIR%/downloads/sogou_mac_%version%.zip</string>
             </dict>
         </dict>
         <dict>
