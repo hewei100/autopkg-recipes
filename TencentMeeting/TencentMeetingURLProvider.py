@@ -63,7 +63,7 @@ class TencentMeetingURLProvider(URLGetter):
         browser = webdriver.Safari()
         #browser = EventFiringWebDriver(browser, MyListener())
         browser.get(LANDING_PAGE_URL)
-        mac_tab = browser.find_element(By.CLASS_NAME, 'mt-download-card-mini macos')
+        #mac_tab = browser.find_element(By.CLASS_NAME, 'mt-download-card-mini macos')
 
         version_element = WebDriverWait(browser, 10).until(
             EC.presence_of_element_located((By.CLASS_NAME,'mt-download-card-mini__tit-version'))
@@ -74,13 +74,17 @@ class TencentMeetingURLProvider(URLGetter):
         (function(){
             var orig = window.XMLHttpRequest.prototype.send;
             window.XMLHttpRequest.prototype.send = function() {
-                if ( this.aegisUrl && this.aegisUrl.startsWith('/web-service/query-download-info?') ) {
+                if ( this.aegisUrl && this.aegisUrl.includes('/web-service/query-download-info') ) {
                     window.XMLHttpRequest.prototype.send = orig;
                     var req = new XMLHttpRequest();
                     req.open('GET', this.aegisUrl, false);
                     var r = req.send();
                     if ( req.status == '200' ) {
-                        document.getElementById('apple').setAttribute('data-download-info', req.responseText);
+                        var resp = JSON.parse(req.responseText);
+                        var info = resp['info-list'][0];
+                        var el = document.getElementById('apple');
+                        el.setAttribute('data-version', info.version);
+                        el.setAttribute('data-download-url', info.url);
                     }
                     return r;
                 }
@@ -90,6 +94,7 @@ class TencentMeetingURLProvider(URLGetter):
         """);
 
         version_str = version_element.text
+        print("=== Got version string: %s" % version_str, file=sys.stderr)
         self.env["version"] = re.sub(r'(^[^\d]+)', '', version_str)
 
         ActionChains(browser).move_to_element(version_element).click().perform()
@@ -98,13 +103,17 @@ class TencentMeetingURLProvider(URLGetter):
         )
         time.sleep(1)
         ActionChains(browser).move_to_element(arm64_element).click().perform()
-        time.sleep(1)
-        download_info = arm64_element.get_attribute('data-download-info')
-        if download_info:
-            print("=== Got download info: %s" % str(download_info), file=sys.stderr)
-            info = json.loads(download_info)['info-list'][0]
-            self.env['version'] = info['version']
-            self.env['url'] = info['url']
+        time.sleep(2)
+
+        version = arm64_element.get_attribute('data-version')
+        if version:
+            print("=== Got version: %s" % version, file=sys.stderr)
+            self.env['version'] = version
+
+        download_url = arm64_element.get_attribute('data-download-url')
+        if download_url:
+            print("=== Got download url: %s" % download_url, file=sys.stderr)
+            self.env['url'] = download_url
 
         browser.close()
 
