@@ -63,12 +63,14 @@ class TencentMeetingURLProvider(URLGetter):
         browser = webdriver.Safari()
         #browser = EventFiringWebDriver(browser, MyListener())
         browser.get(LANDING_PAGE_URL)
-        #mac_tab = browser.find_element(By.CLASS_NAME, 'mt-download-card-mini macos')
+        #mac_tab = browser.find_element(By.CSS_SELECTOR,'div.mt-download-card-mini.macos')
+        # wait till page finishes loading
+        time.sleep(2)
 
         version_element = WebDriverWait(browser, 10).until(
             EC.presence_of_element_located((By.CLASS_NAME,'mt-download-card-mini__tit-version'))
         )
-        time.sleep(1)
+        time.sleep(2)
 
         browser.execute_script("""
         (function(){
@@ -97,17 +99,22 @@ class TencentMeetingURLProvider(URLGetter):
         print("=== Got version string: %s" % version_str, file=sys.stderr)
         self.env["version"] = re.sub(r'(^[^\d]+)', '', version_str)
 
-        ActionChains(browser).move_to_element(version_element).click().perform()
+#         download_element = WebDriverWait(browser, 10).until(
+#             EC.presence_of_element_located((By.CSS_SELECTOR,'div.mt-download-card-mini.macos'))
+#         )
+
+        ActionChains(browser).move_to_element(version_element).pause(1).click().perform()
+
         arm64_element = WebDriverWait(browser, 10).until(
             EC.presence_of_element_located((By.ID,'apple'))
         )
         time.sleep(1)
-        ActionChains(browser).move_to_element(arm64_element).click().perform()
+        ActionChains(browser).move_to_element(arm64_element).pause(1).click().perform()
         time.sleep(2)
 
         version = arm64_element.get_attribute('data-version')
         if version:
-            print("=== Got version: %s" % version, file=sys.stderr)
+            print("=== Got Apple Silicon Version: %s" % version, file=sys.stderr)
             self.env['version'] = version
 
         download_url = arm64_element.get_attribute('data-download-url')
@@ -123,7 +130,7 @@ if __name__ == "__main__":
 
 
 #
-# debug: /usr/local/munki/munki-python
+# debug requests: /usr/local/munki/munki-python
 #
 """
 import re
@@ -158,3 +165,39 @@ async def get_url():
 AsyncHTMLSession().run(get_ver, get_url)
 
 """
+
+
+#
+# debug selenium: /usr/local/autopkg/python
+#
+"""
+import sys, os, logging, re, time, json
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver import ActionChains
+from selenium.webdriver.support.events import EventFiringWebDriver, AbstractEventListener
+LANDING_PAGE_URL = "https://meeting.tencent.com/download/"
+DOWNLOAD_PAGE_URL = "https://updatecdn.meeting.qq.com/cos/7861cf367f7764fc531090effa381b3c/TencentMeeting_0300000000_3.24.3.401.publish.arm64.officialwebsite.dmg"
+USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_3) AppleWebKit/536.28.10 (KHTML, like Gecko) Version/6.0.3 Safari/536.28.10'
+browser = webdriver.Safari()
+browser.get(LANDING_PAGE_URL)
+time.sleep(2)
+version_element = WebDriverWait(browser, 10).until(
+  EC.presence_of_element_located((By.CLASS_NAME,'mt-download-card-mini__tit-version'))
+)
+
+time.sleep(1)
+version_str = version_element.text
+print("=== Got version string: %s" % version_str, file=sys.stderr)
+
+download_element = WebDriverWait(browser, 10).until(
+  EC.presence_of_element_located((By.CSS_SELECTOR,'div.mt-download-card-mini.macos'))
+)
+print("=== Got version string: %s" % version_str, file=sys.stderr)
+ActionChains(browser).move_to_element(download_element).pause(1).perform()
+browser.close()
+"""
+
