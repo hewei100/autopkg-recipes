@@ -3,17 +3,13 @@
 <plist version="1.0">
 <dict>
     <key>Description</key>
-    <string>Downloads latest WeChat Input disk image.</string>
+    <string>Downloads latest WeChat disk image using Homebrew Cask JSON API.</string>
     <key>Identifier</key>
     <string>com.github.hewei100.download.WeChat</string>
     <key>Input</key>
     <dict>
         <key>NAME</key>
         <string>WeChat</string>
-        <key>SEARCH_URL</key>
-        <string>https://mac.weixin.qq.com</string>
-        <key>SEARCH_PATTERN</key>
-        <string>(?P&lt;url&gt;https://[^"']*WeChatMac\.dmg)</string>
         <key>USER_AGENT</key>
         <string>Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_3) AppleWebKit/536.28.10 (KHTML, like Gecko) Version/6.0.3 Safari/536.28.10</string>
     </dict>
@@ -23,14 +19,7 @@
     <array>
         <dict>
             <key>Processor</key>
-            <string>URLTextSearcher</string>
-            <key>Arguments</key>
-            <dict>
-                <key>url</key>
-                <string>%SEARCH_URL%</string>
-                <key>re_pattern</key>
-                <string>%SEARCH_PATTERN%</string>
-            </dict>
+            <string>WeChatCaskURLProvider</string>
         </dict>
         <dict>
             <key>Processor</key>
@@ -39,11 +28,6 @@
             <dict>
                 <key>url</key>
                 <string>%url%</string>
-                <key>request_headers</key>
-                <dict>
-                    <key>user-agent</key>
-                    <string>%USER_AGENT%</string>
-                </dict>
                 <key>filename</key>
                 <string>%NAME%.dmg</string>
             </dict>
@@ -52,6 +36,6 @@
             <key>Processor</key>
             <string>EndOfCheckPhase</string>
         </dict>
-      </array>
+    </array>
 </dict>
 </plist>
