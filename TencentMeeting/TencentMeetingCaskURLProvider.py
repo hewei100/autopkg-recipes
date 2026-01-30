@@ -10,6 +10,9 @@ __all__ = ["TencentMeetingCaskURLProvider"]
 
 CASK_JSON_URL = "https://formulae.brew.sh/api/cask/tencent-meeting.json"
 
+# Bypass SSL certificate verification
+ssl._create_default_https_context = ssl._create_unverified_context
+
 class TencentMeetingCaskURLProvider(Processor):
     description = "Fetches the latest Tencent Meeting download URL and version from Homebrew Cask JSON API."
     input_variables = {}
