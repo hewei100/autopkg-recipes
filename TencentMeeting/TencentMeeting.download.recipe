@@ -23,12 +23,7 @@
     <array>
         <dict>
             <key>Processor</key>
-            <string>TencentMeetingURLProvider</string>
-            <key>Arguments</key>
-            <dict>
-                <key>user-agent</key>
-                <string>%USER_AGENT%</string>
-            </dict>
+            <string>TencentMeetingCaskURLProvider</string>
         </dict>
         <dict>
             <key>Processor</key>
