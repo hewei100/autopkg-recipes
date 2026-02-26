@@ -12,6 +12,10 @@
         <string>Claude</string>
         <key>MUNKI_REPO_SUBDIR</key>
         <string>apps</string>
+        <key>APP_PATH</key>
+        <string>/Applications/Claude.app</string>
+        <key>BUNDLE_ID</key>
+        <string>com.anthropic.claudefordesktop</string>
         <key>pkginfo</key>
         <dict>
             <key>catalogs</key>
@@ -40,6 +44,17 @@
     <string>com.github.hewei100.pkg.Claude</string>
     <key>Process</key>
     <array>
+        <dict>
+            <key>Processor</key>
+            <string>SetAppInstallsFromVersion</string>
+            <key>Arguments</key>
+            <dict>
+                <key>app_path</key>
+                <string>%APP_PATH%</string>
+                <key>bundle_id</key>
+                <string>%BUNDLE_ID%</string>
+            </dict>
+        </dict>
         <dict>
             <key>Processor</key>
             <string>MunkiImporter</string>
